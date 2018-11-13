@@ -1,0 +1,236 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.renai.mapper.DatainfoMapper" >
+    <resultMap id="BaseResultMap" type="cn.renai.pojo.Datainfo" >
+        <id column="DID" property="did" jdbcType="VARCHAR" />
+        <result column="NAME" property="name" jdbcType="VARCHAR" />
+        <result column="INFOURL" property="infourl" jdbcType="VARCHAR" />
+        <result column="INFOKEY" property="infokey" jdbcType="VARCHAR" />
+        <result column="INTRODUCE" property="introduce" jdbcType="VARCHAR" />
+        <result column="CATEGORY_ID" property="categoryId" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        DID, NAME, INFOURL, INFOKEY, INTRODUCE, CATEGORY_ID
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.renai.pojo.DatainfoExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from datainfo
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from datainfo
+        where DID = #{did,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from datainfo
+        where DID = #{did,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="cn.renai.pojo.DatainfoExample" >
+        delete from datainfo
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="cn.renai.pojo.Datainfo" >
+        insert into datainfo (DID, NAME, INFOURL,
+        INFOKEY, INTRODUCE, CATEGORY_ID
+        )
+        values (#{did,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{infourl,jdbcType=VARCHAR},
+        #{infokey,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, #{categoryId,jdbcType=VARCHAR}
+        )
+    </insert>
+    <insert id="insertSelective" parameterType="cn.renai.pojo.Datainfo" >
+        insert into datainfo
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="did != null" >
+                DID,
+            </if>
+            <if test="name != null" >
+                NAME,
+            </if>
+            <if test="infourl != null" >
+                INFOURL,
+            </if>
+            <if test="infokey != null" >
+                INFOKEY,
+            </if>
+            <if test="introduce != null" >
+                INTRODUCE,
+            </if>
+            <if test="categoryId != null" >
+                CATEGORY_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="did != null" >
+                #{did,jdbcType=VARCHAR},
+            </if>
+            <if test="name != null" >
+                #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="infourl != null" >
+                #{infourl,jdbcType=VARCHAR},
+            </if>
+            <if test="infokey != null" >
+                #{infokey,jdbcType=VARCHAR},
+            </if>
+            <if test="introduce != null" >
+                #{introduce,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryId != null" >
+                #{categoryId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="cn.renai.pojo.DatainfoExample" resultType="java.lang.Integer" >
+        select count(*) from datainfo
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update datainfo
+        <set >
+            <if test="record.did != null" >
+                DID = #{record.did,jdbcType=VARCHAR},
+            </if>
+            <if test="record.name != null" >
+                NAME = #{record.name,jdbcType=VARCHAR},
+            </if>
+            <if test="record.infourl != null" >
+                INFOURL = #{record.infourl,jdbcType=VARCHAR},
+            </if>
+            <if test="record.infokey != null" >
+                INFOKEY = #{record.infokey,jdbcType=VARCHAR},
+            </if>
+            <if test="record.introduce != null" >
+                INTRODUCE = #{record.introduce,jdbcType=VARCHAR},
+            </if>
+            <if test="record.categoryId != null" >
+                CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update datainfo
+        set DID = #{record.did,jdbcType=VARCHAR},
+        NAME = #{record.name,jdbcType=VARCHAR},
+        INFOURL = #{record.infourl,jdbcType=VARCHAR},
+        INFOKEY = #{record.infokey,jdbcType=VARCHAR},
+        INTRODUCE = #{record.introduce,jdbcType=VARCHAR},
+        CATEGORY_ID = #{record.categoryId,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.renai.pojo.Datainfo" >
+        update datainfo
+        <set >
+            <if test="name != null" >
+                NAME = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="infourl != null" >
+                INFOURL = #{infourl,jdbcType=VARCHAR},
+            </if>
+            <if test="infokey != null" >
+                INFOKEY = #{infokey,jdbcType=VARCHAR},
+            </if>
+            <if test="introduce != null" >
+                INTRODUCE = #{introduce,jdbcType=VARCHAR},
+            </if>
+            <if test="categoryId != null" >
+                CATEGORY_ID = #{categoryId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where DID = #{did,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.renai.pojo.Datainfo" >
+        update datainfo
+        set NAME = #{name,jdbcType=VARCHAR},
+        INFOURL = #{infourl,jdbcType=VARCHAR},
+        INFOKEY = #{infokey,jdbcType=VARCHAR},
+        INTRODUCE = #{introduce,jdbcType=VARCHAR},
+        CATEGORY_ID = #{categoryId,jdbcType=VARCHAR}
+        where DID = #{did,jdbcType=VARCHAR}
+    </update>
+
+    <select id="queryAll" resultMap="BaseResultMap">
+        SELECT * FROM DATAINFO
+    </select>
+
+    <select id="queryByCategory_id" parameterType="string" resultMap="BaseResultMap">
+        SELECT * FROM DATAINFO WHERE CATEGORY_ID = #{cid}
+    </select>
+</mapper>

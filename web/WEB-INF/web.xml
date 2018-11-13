@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+    <display-name>RenAiClub</display-name>
+
+    <welcome-file-list>
+        <welcome-file>index.html</welcome-file>
+        <welcome-file>index.htm</welcome-file>
+        <welcome-file>index.jsp</welcome-file>
+        <welcome-file>default.html</welcome-file>
+        <welcome-file>default.htm</welcome-file>
+        <welcome-file>default.jsp</welcome-file>
+    </welcome-file-list>
+
+
+
+    <!-- 加载spring容器   监听器 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>classpath:Application-*.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <!-- springmvc前端控制器 -->
+    <servlet>
+        <servlet-name>springMvc</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class><!--DispatcherServlet：前端控制器 -->
+        <init-param><!-- 初始化参数contextConfigLocation（全局初始化本地配置），配置SpringMvc核心配置文件的位置和名称 -->
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath:SpringMvc.xml</param-value><!--如果没有指定contextConfigLocation的classpath:SpringMvc.xml那么就会默认去找 <servlet-name>springMvc</servlet-name>/WEB-INF/springMvc-servlet.xml文件-->
+        </init-param>
+        <load-on-startup>1</load-on-startup><!--这个必须放在init-param下面-->
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>springMvc</servlet-name>
+        <url-pattern>*.action</url-pattern>	<!--  / 拦截除jsp外的所有请求       /* 拦截所有请求  -->
+    </servlet-mapping>
+
+    <!-- 配置Post请求乱码 -->
+    <!--解决从jsp页面向controller传递数据时，input参数含有中文的情况-->
+    <filter>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>utf-8</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>CharacterEncodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+</web-app>

@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.renai.mapper.UserSecurityMapper" >
+    <resultMap id="BaseResultMap" type="cn.renai.pojo.UserSecurity" >
+        <id column="U_I_ID" property="uIId" jdbcType="VARCHAR" />
+        <result column="QUESTION" property="question" jdbcType="VARCHAR" />
+        <result column="ANSWER" property="answer" jdbcType="VARCHAR" />
+        <result column="USER_ID" property="userId" jdbcType="VARCHAR" />
+    </resultMap>
+    <sql id="Example_Where_Clause" >
+        <where >
+            <foreach collection="oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Update_By_Example_Where_Clause" >
+        <where >
+            <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+                <if test="criteria.valid" >
+                    <trim prefix="(" suffix=")" prefixOverrides="and" >
+                        <foreach collection="criteria.criteria" item="criterion" >
+                            <choose >
+                                <when test="criterion.noValue" >
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue" >
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue" >
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue" >
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+    <sql id="Base_Column_List" >
+        U_I_ID, QUESTION, ANSWER, USER_ID
+    </sql>
+    <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.renai.pojo.UserSecurityExample" >
+        select
+        <if test="distinct" >
+            distinct
+        </if>
+        <include refid="Base_Column_List" />
+        from user_security
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+        <if test="orderByClause != null" >
+            order by ${orderByClause}
+        </if>
+    </select>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+        select
+        <include refid="Base_Column_List" />
+        from user_security
+        where U_I_ID = #{uIId,jdbcType=VARCHAR}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+        delete from user_security
+        where U_I_ID = #{uIId,jdbcType=VARCHAR}
+    </delete>
+    <delete id="deleteByExample" parameterType="cn.renai.pojo.UserSecurityExample" >
+        delete from user_security
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </delete>
+    <insert id="insert" parameterType="cn.renai.pojo.UserSecurity" >
+        insert into user_security (U_I_ID, QUESTION, ANSWER,
+        USER_ID)
+        values (#{uIId,jdbcType=VARCHAR}, #{question,jdbcType=VARCHAR}, #{answer,jdbcType=VARCHAR},
+        #{userId,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="cn.renai.pojo.UserSecurity" >
+        insert into user_security
+        <trim prefix="(" suffix=")" suffixOverrides="," >
+            <if test="uIId != null" >
+                U_I_ID,
+            </if>
+            <if test="question != null" >
+                QUESTION,
+            </if>
+            <if test="answer != null" >
+                ANSWER,
+            </if>
+            <if test="userId != null" >
+                USER_ID,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides="," >
+            <if test="uIId != null" >
+                #{uIId,jdbcType=VARCHAR},
+            </if>
+            <if test="question != null" >
+                #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null" >
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                #{userId,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <select id="countByExample" parameterType="cn.renai.pojo.UserSecurityExample" resultType="java.lang.Integer" >
+        select count(*) from user_security
+        <if test="_parameter != null" >
+            <include refid="Example_Where_Clause" />
+        </if>
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
+        update user_security
+        <set >
+            <if test="record.uIId != null" >
+                U_I_ID = #{record.uIId,jdbcType=VARCHAR},
+            </if>
+            <if test="record.question != null" >
+                QUESTION = #{record.question,jdbcType=VARCHAR},
+            </if>
+            <if test="record.answer != null" >
+                ANSWER = #{record.answer,jdbcType=VARCHAR},
+            </if>
+            <if test="record.userId != null" >
+                USER_ID = #{record.userId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByExample" parameterType="map" >
+        update user_security
+        set U_I_ID = #{record.uIId,jdbcType=VARCHAR},
+        QUESTION = #{record.question,jdbcType=VARCHAR},
+        ANSWER = #{record.answer,jdbcType=VARCHAR},
+        USER_ID = #{record.userId,jdbcType=VARCHAR}
+        <if test="_parameter != null" >
+            <include refid="Update_By_Example_Where_Clause" />
+        </if>
+    </update>
+    <update id="updateByPrimaryKeySelective" parameterType="cn.renai.pojo.UserSecurity" >
+        update user_security
+        <set >
+            <if test="question != null" >
+                QUESTION = #{question,jdbcType=VARCHAR},
+            </if>
+            <if test="answer != null" >
+                ANSWER = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="userId != null" >
+                USER_ID = #{userId,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where U_I_ID = #{uIId,jdbcType=VARCHAR}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="cn.renai.pojo.UserSecurity" >
+        update user_security
+        set QUESTION = #{question,jdbcType=VARCHAR},
+        ANSWER = #{answer,jdbcType=VARCHAR},
+        USER_ID = #{userId,jdbcType=VARCHAR}
+        where U_I_ID = #{uIId,jdbcType=VARCHAR}
+    </update>
+
+    <select id="selectByUid" parameterType="string" resultType="cn.renai.pojo.UserSecurity">
+        SELECT * FROM USER_SECURITY WHERE USER_ID = #{uid}
+    </select>
+
+    <update id="updateByUserid" parameterType="cn.renai.pojo.UserSecurity" >
+        update user_security
+        set QUESTION = #{question,jdbcType=VARCHAR},
+        ANSWER = #{answer,jdbcType=VARCHAR}
+        where USER_ID = #{userId,jdbcType=VARCHAR}
+    </update>
+</mapper>

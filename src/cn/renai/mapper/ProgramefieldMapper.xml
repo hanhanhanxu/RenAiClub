@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.renai.mapper.ProgramefieldMapper" >
+    <resultMap id="BaseResultMap" type="cn.renai.pojo.Programefield" >
+        <id column="id" property="id" />
+        <result column="field" property="field" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="GetAllProCateField" resultMap="BaseResultMap">
+        SELECT * FROM programefield;
+    </select>
+
+    <insert id="AddProCateField" parameterType="cn.renai.pojo.Programefield">
+        INSERT INTO programefield(id,field)
+        VALUES (#{id,jdbcType=VARCHAR},#{field,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="UpdateProCateField" parameterType="cn.renai.pojo.Programefield">
+        UPDATE programefield SET field = #{field,jdbcType=VARCHAR} WHERE id = #{id,jdbcType=VARCHAR}
+    </update>
+
+    <delete id="DeleteProCateField" parameterType="java.lang.String">
+        DELETE FROM programefield WHERE id = #{ID,jdbcType=VARCHAR}
+    </delete>
+
+</mapper>

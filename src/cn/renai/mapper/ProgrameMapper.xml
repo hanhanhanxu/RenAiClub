@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.renai.mapper.ProgrameMapper" >
+    <resultMap id="BaseResultMap" type="cn.renai.pojo.Programe" >
+        <id column="id" property="id" />
+        <result column="category" property="category" jdbcType="VARCHAR" />
+        <result column="field" property="field" jdbcType="VARCHAR"></result>
+        <result column="title" property="title" jdbcType="VARCHAR" />
+        <result column="content" property="content" jdbcType="VARCHAR" />
+        <result column="href" property="href" jdbcType="VARCHAR" />
+        <result column="password" property="password" jdbcType="VARCHAR" />
+        <result column="filename" property="filename" jdbcType="VARCHAR" />
+        <result column="fileposition" property="fileposition" jdbcType="VARCHAR" />
+    </resultMap>
+
+    <select id="getall" resultMap="BaseResultMap">
+        SELECT * FROM programe
+    </select>
+
+    <insert id="insertprocategory" parameterType="cn.renai.pojo.Programe">
+        insert into programe (
+          category,field,title,content,href,password,filename,fileposition
+        )
+        values (#{category,jdbcType=VARCHAR},#{field,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+        #{href,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{filename,jdbcType=VARCHAR},
+        #{fileposition,jdbcType=VARCHAR})
+    </insert>
+
+    <update id="UpdateProcategory" parameterType="cn.renai.pojo.Programe">
+        UPDATE programe SET category = #{category,jdbcType=VARCHAR} ,field = #{field,jdbcType=VARCHAR} ,
+            title = #{title,jdbcType=VARCHAR}, content = #{content,jdbcType=VARCHAR} , href = #{href,jdbcType=VARCHAR},
+            password = #{password,jdbcType=VARCHAR} , filename =#{filename,jdbcType=VARCHAR} WHERE id = #{id}
+    </update>
+
+    <delete id="DeleteProcategory" parameterType="java.lang.String">
+        DELETE FROM programe WHERE id = #{ID}
+    </delete>
+
+    <select id="ListProBySelect" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM programe WHERE category = #{0} AND field = #{1}
+    </select>
+
+    <select id="ListProBySelectCate" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM programe WHERE category = #{0}
+    </select>
+
+    <select id="ListProBySelectField" parameterType="java.lang.String" resultMap="BaseResultMap">
+        SELECT * FROM programe WHERE field = #{0}
+    </select>
+
+    <select id="SelectByid" resultMap="BaseResultMap" parameterType="java.lang.String">
+        SELECT * FROM programe WHERE id = #{0}
+    </select>
+
+</mapper>
