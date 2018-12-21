@@ -10,66 +10,82 @@
 <html>
 <head>
     <title>学习资料-RenAlCulb-Sharing-Info</title>
-    <style>
-        #div1{
-            position: absolute;
-            left: 30px;
-            float: left;
-        }
-        #div2{
-            width: 1000px;
-            height: 600px;
-            background-color: #25aae1;
-            margin-left: 250px;
-            float: left;
-        }
-
-    </style>
+    <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/data.css" />
 </head>
+
 <body>
 
-    <h1 align="center">学习资料</h1>
-    <br><br>
-    <a href="${pageContext.request.contextPath}/index.jsp">去首页</a>
-    <br><br>
-    <div id="div1">
-        <table border="2px">
-            <tbody>
+<div class="heard">
+
+    <div class="biao_ti">
+        <h1>学习资料</h1>
+    </div>
+    <div class="header_nav">
+
+        <ul  class="header_nav_ul">
+            <li><a href="${pageContext.request.contextPath}/index.jsp">去首页</a></li>
+            <li> <a href="https://pan.baidu.com/disk/home?#/all?path=%2F&vmode=list" target="_blank"> 百度网盘</a></li>
+        </ul>
+
+    </div>
+
+</div>
+
+
+<div class="main">
+    <div class="center">
+
+        <div id="div1">
+
+            <table  class="center_table"  cellpadding="0" cellspacing="0">
+
                 <tr>
                     <td width="150px">${mname}</td>
                 </tr>
-            <c:forEach items="${categoryItems}" var="item">
-                <tr>
-                    <td width="150px"><a href="${pageContext.request.contextPath}/DataInfo/GetInfo.action?cid=${item.cid}">${item.name}</a></td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
-    </div>
+                <c:forEach items="${categoryItems}" var="item">
+                    <tr>
+                        <td width="150px"><a href="${pageContext.request.contextPath}/DataInfo/GetInfo.action?cid=${item.cid}">${item.name}</a></td>
+                    </tr>
+                </c:forEach>
+
+            </table>
+        </div>
 
 
-    <div id="div2">
-        <table border="1px">
-            <tbody>
-            <tr width="400px">
-                <td>名称</td>
-                <td>链接</td>
-                <td>密码</td>
-                <td>介绍</td>
-            </tr>
-            <c:forEach items="${datainfoItems}" var="item">
+        <div id="div2">
+            <table  class="center_table_two" cellpadding="0" cellspacing="10px">
+
                 <tr>
-                    <td>${item.name}</td>
-                    <td>
-                        <a href="${item.infourl}" target="_blank">${item.infourl}</a>
-                    </td>
-                    <td>${item.infokey}</td>
-                    <td>${item.introduce}</td>
-                </tr>
-            </c:forEach>
-            </tbody>
-        </table>
+                    <td >名称</td>
+                    <td >链接</td>
+                    <td >密码</td>
+                    <td >介绍</td>
+                </tr >
+                <c:forEach items="${datainfoItems}" var="item">
+                    <tr>
+                        <td>${item.name}</td>
+                        <td>
+                            <a href="${item.infourl}" target="_blank">${item.infourl}</a>
+                        </td>
+                        <td>${item.infokey}</td>
+                        <td>${item.introduce}</td>
+                    </tr>
+                </c:forEach>
+
+            </table>
+        </div>
+
     </div>
+</div>
+<div class="footer">
+    <ul class="foot_list">
+        <li>微笑</li>
+        <li>合作</li>
+        <li>钻研</li>
+        <li>无止境</li>
+        <li>仁爱工作室</li>
+    </ul>
+</div>
 
 
 </body>

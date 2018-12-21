@@ -17,15 +17,19 @@
     <link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
     <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <link href="favicon.ico" rel="shortcut icon">
 </head>
 <body>
 <c:if test="${modularItems==null}">
     <jsp:forward page="${pageContext.request.contextPath}/UILoad/LoadIndex.action"></jsp:forward>
 </c:if>
 
+<!-- 我新加的-->
+
 <div class="div1">
+    <div class="nav_show">
         <div class="nav">
-                <ul class="menu">
+            <ul class="menu">
                 <li>
                     <a class="active" href="javascript:;">首页</a>
                 </li>
@@ -86,15 +90,17 @@
                 <li>
                     <a href="${pageContext.request.contextPath}/UILoad/exam.action">考试专区</a>
                 </li>
+
+
                 <li class="log">
                     <c:if test="${user==null}">
-                        <a href="/UILogin/login.action">登 录</a>
+                        <a href="/UILogin/login.action">登 录</a>。
                     </c:if>
                     <c:if test="${user!=null}">
-                        <ul class="menu">
+                        <ul class="menu" id="huanying">
                             <li>
                                 <a href="/UILogin/ToMyInfo.action">欢迎,${user.nickname}</a>
-                                <ul class="menu-a">
+                                <ul class="menu-a" id="tui_chu">
                                     <li><a href="/LoginAndRegist/unsubscribe.action">退出</a></li>
                                 </ul>
                             </li>
@@ -104,11 +110,11 @@
                 </li>
             </ul>
         </div>
-
+    </div>
     <!--
                     背景图片
     -->
-    <div class="info"></div>
+    <div class="info">  <img alt="" src="img/info1.jpg" /></div>
 
     <!--
                        轮播图
@@ -156,27 +162,51 @@
     </div>
 
     <div class="about">
-        <div>
-            <img src="img/renai.jpg" width="90px" height="150px" align="center" title="仁爱工作室官方logo" />
-            <font size="3" face="隶书" color=#000000>仁爱工作室</font>&trade;&copy;2018-08-20 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 感谢赞助商阿里提供云服务：
-            <a href="http://www.aliyun.com" target="_blank">上云就上阿里云</a>
-        </div>
-        <div>
-            <font id="font1">扫描二维码了解我们</font>
-        </div>
-        <div id="erwei">
-            <img src="img/erweima.jpg" width="120px" height="120px" />
-        </div>
+        <div class="about_img"> <a href="#"> <img src="img/renai.jpg" alt="仁爱官方log"/> </a> </div>
+
+        <ul class="about_list">
+            <li><a href="#">关于我们</a></li>
+            <li><a href="#">服务条款</a></li>
+            <li><a href="#">免费声明</a></li>
+            <li><a href="#"><font size="3" face="隶书" color=#000000>仁爱工作室</font>&trade;&copy;2018-08-20</a></li>
+            <li><a href="#">联系我们</a></li>
+        </ul>
     </div>
+    <%--<div class="about_ban"><a href="">@版权：</a></div>
+    <div style="clear: both;"></div>--%>
+
+    <%--<div class="container">
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <div id="footer">
+                    <div class="footerNav">
+                        <a rel="nofollow" href="http://www.layoutit.cn">关于我们</a> | <a rel="nofollow" href="http://www.layoutit.cn">服务条款</a> | <a rel="nofollow" href="http://www.layoutit.cn">免责声明</a> | <a rel="nofollow" href="http://www.layoutit.cn">网站地图</a> | <a rel="nofollow" href="http://www.layoutit.cn">联系我们</a>
+                    </div>
+                    <div class="copyRight">
+                        Copyright ©2010-2014layoutit.cn 版权所有
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>--%>
 
 </div>
 
+
+
+
 <script>
     $(function() {
+
         $(".menu>li").hover(function() {
+
             $(this).find('.menu-a').stop(true, false).slideDown('slow');
+
         }, function() {
+
             $(this).find('.menu-a').stop(true, false).slideUp('slow');
+
         });
     })
 </script>
